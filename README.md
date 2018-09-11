@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/AztecGameLab/AztecGameLaboratory.svg?branch=master)](https://travis-ci.org/AztecGameLab/AztecGameLaboratory)
-
 ## Quick Start
 
 Follow these instructions to start development and our optimal work flow.
