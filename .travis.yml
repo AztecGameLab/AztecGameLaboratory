@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+    - "node"
+cache:
+    directories:
+        - node_modules
+script:
+    - yarn test
+    - yarn build
+# branches:
+#     only:
+#         - master
+#         - dev
+#         - test-travis
+# TODO: Configure firebase deployment
+# https://docs.travis-ci.com/user/deployment/firebase/
+# deploy:
+#     on:
+#         branch:
+#             - master
