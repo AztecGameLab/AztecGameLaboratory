@@ -1,3 +1,7 @@
+require('dotenv').config()
+
+// To use dotenv, EVERYONE_SEES_THIS_KEY = process.env.THIS_KEY_IS_HIDDEN
+
 import React, { Component } from "react";
 
 class App extends Component {
