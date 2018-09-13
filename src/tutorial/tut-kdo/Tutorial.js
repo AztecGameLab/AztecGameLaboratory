@@ -31,7 +31,7 @@ class KevinDoTutorial extends Component {
     }
 }
 
-const FunctionalComponent = () => {
+export const FunctionalComponent = () => {
     return <h1> Hi I am a FunctionalComponent</h1>;
 };
 
