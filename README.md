@@ -1,37 +1,36 @@
-[![Build Status](https://travis-ci.org/AztecGameLab/AztecGameLaboratory.svg?branch=test%2Fkdo%2Ftravis-ci)](https://travis-ci.org/AztecGameLab/AztecGameLaboratory)
+![3d outline](https://user-images.githubusercontent.com/18412636/45466279-bec60700-b6cd-11e8-9144-7343b420b459.jpg)
+
+[![Build Status](https://travis-ci.org/AztecGameLab/AztecGameLaboratory.svg?branch=master)](https://travis-ci.org/AztecGameLab/AztecGameLaboratory)
 
 ## Quick Start
 
 Follow these instructions to start development and our optimal work flow.
 
-1. Install VSCode
-2. Install GitKraken
-3. Enable format on save (Preferences -> Settings)
-4. Update your node version
-5. Install yarn if needed
-   ![here](https://i.imgur.com/67AO4Pf.png)
-6. Clone the repository
+# Installation
 
-## VSCode Plugins
+1. Install [VSCode](https://code.visualstudio.com/)
+2. Enable format on save (Preferences -> Search "on save" -> Formatting -> Settings)
 
-1. Install GitLens
-2. Install Prettier
-3. Install Markdown Preview Enhanced
-4. Install Bracket Pair Colorizer
-5. Install Auto Close Tag & Auto Rename Tag
-6. Install Path Intellisense
-7. Install vscode-icons
+![here](https://i.imgur.com/67AO4Pf.png)
 
-## Scripts
+3. Add recommended [Visual Code Plugins](https://github.com/AztecGameLab/AztecGameLaboratory/wiki/Recommended-Visual-Studio-Code-Plugins)
+4. Install [GitKraken](https://www.gitkraken.com/)
+5. Install [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)
+6. Install [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+7. Install [Node](https://nodejs.org/en/)
+8. Install [Yarn](https://yarnpkg.com/en/)
 
-Refer to the `package.json`
+# Development
 
-1. Install our dependencies: yarn
-2. Develop locally: yarn start
-3. Build production version: yarn build
-4. Test: yarn test
+Refer to the `package.json` for scripts
+
+1. Clone this repository
+2. `yarn`
+3. `yarn start`
+
+Please [visit the tutorial](https://github.com/AztecGameLab/AztecGameLaboratory/wiki/Tutorial) to learn some basics and how to contribute.
 
 ## Last Updated
 
--   Last updated: September 10, 2018 by Kevin Do
--   Please update this date when README is edited!
+-   Last updated: September 12, 2018 by Kevin Do
+-   Please update this date when README is edited
