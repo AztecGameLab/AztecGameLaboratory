@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { selectTestData } from "../../redux/testSelector";
+import { bindActionCreators } from "redux";
+
+import { testAction } from "../../redux/testActions";
 
 class KevinDoTutorial extends Component {
     state = {
@@ -21,6 +24,7 @@ class KevinDoTutorial extends Component {
                 <p>Redux Data: {this.props.testData.test}</p>
                 <button onClick={this.onClickHandleCount}>Click me to increase count!</button>
                 <p>Count: {this.state.count}</p>
+                <button onClick={this.props.testAction}>Click me to run testAction!</button>
             </React.Fragment>
         );
     }
@@ -36,4 +40,15 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(KevinDoTutorial);
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            testAction
+        },
+        dispatch
+    );
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(KevinDoTutorial);
