@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import Tutorial from "./tutorial/tut-kdo/Tutorial";
 
 const config = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -30,6 +31,7 @@ class App extends Component {
                     <h1 className="App-title">Welcome to Aztec Game Lab</h1>
                 </header>
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                <Tutorial />
             </div>
         );
     }

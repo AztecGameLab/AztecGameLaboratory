@@ -16,6 +16,7 @@ class KevinDoTutorial extends Component {
             <React.Fragment>
                 <FunctionalComponent />
                 <button onClick={this.onClickHandleCount}>Click me to increase count!</button>
+                Count: {this.state.count}
             </React.Fragment>
         );
     }
