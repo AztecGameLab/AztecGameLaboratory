@@ -17,8 +17,8 @@ Follow these instructions to start development and our optimal work flow.
 4. Install [GitKraken](https://www.gitkraken.com/)
 5. Install [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)
 6. Install [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
-7. Install [Node](https://nodejs.org/en/)
-8. Install [Yarn](https://yarnpkg.com/en/)
+7. Install/Update [Node](https://nodejs.org/en/)
+8. Install/Update [Yarn](https://yarnpkg.com/en/)
 
 # Development
 
@@ -27,7 +27,8 @@ Refer to the `package.json` for scripts
 1. Clone this repository
 2. `yarn`
 3. `yarn start`
-4. You will need the developer .env config. Please ping Kevin or Andrew for the private gist.
+4. You will need to create a .env file
+5. Please ping Kevin or Andrew for the private gist.
 
 Please [visit the tutorial](https://github.com/AztecGameLab/AztecGameLaboratory/wiki/Tutorial) to learn some basics and how to contribute.
 
