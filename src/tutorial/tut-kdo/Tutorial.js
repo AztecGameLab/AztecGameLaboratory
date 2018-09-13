@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class KevinDoTutorial extends Component {
     state = {
@@ -6,8 +7,9 @@ class KevinDoTutorial extends Component {
     };
 
     onClickHandleCount = e => {
+        const lastCount = this.state.count;
         this.setState({
-            count: (this.state.count += 1)
+            count: lastCount + 1
         });
     };
 
@@ -16,7 +18,7 @@ class KevinDoTutorial extends Component {
             <React.Fragment>
                 <FunctionalComponent />
                 <button onClick={this.onClickHandleCount}>Click me to increase count!</button>
-                Count: {this.state.count}
+                <p>Count: {this.state.count}</p>
             </React.Fragment>
         );
     }
