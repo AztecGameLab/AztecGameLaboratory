@@ -27,6 +27,7 @@ Refer to the `package.json` for scripts
 1. Clone this repository
 2. `yarn`
 3. `yarn start`
+4. You will need the developer .env config. Please ping Kevin or Andrew for the private gist.
 
 Please [visit the tutorial](https://github.com/AztecGameLab/AztecGameLaboratory/wiki/Tutorial) to learn some basics and how to contribute.
 
