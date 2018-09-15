@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { FunctionalComponent } from "../tut-kdo/Tutorial";
+import { connect } from "react-redux";
+import { selectTestData } from "../../redux/testSelector";
 
 class ACDeLeonTutorial extends Component {
   state = {
@@ -15,11 +16,11 @@ class ACDeLeonTutorial extends Component {
   render() {
     return (
       <React.Fragment>
-        <FunctionalComponent />>
+        <FunctionalComponent />
         <button onClick={this.onClickHandleCount}>
           Click on me to increase the count!
         </button>
-        Count: {this.state.count}
+        <p>Count: {this.state.count}</p>
       </React.Fragment>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import KevinDoTutorial from "./tutorial/tut-kdo/Tutorial";
+// import KevinDoTutorial from "./tutorial/tut-kdo/Tutorial";
 import ACDeLeonTutorial from "./tutorial/tut-adeleon/Tutorial";
 
 const config = {
