@@ -1,14 +1,18 @@
 const initialState = {
-    test: "Hello World"
+  test: "Hello World"
 };
 
 export default (state = initialState, action) => {
-    switch (action.type) {
-        case "TEST_ACTION":
-            return { test: "Hello Redux" };
-        case "KEVIN":
-            return { test: "KEVIN WAS HERE" };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case "TEST_ACTION":
+      return { test: "Hello Redux" };
+    case "KEVIN":
+      return { test: "KEVIN WAS HERE" };
+    case "JIN":
+      return { test: "YAHOO" };
+    case "JIN2":
+      return { test: "HE SAID IT" };
+    default:
+      return state;
+  }
 };
