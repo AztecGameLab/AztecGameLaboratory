@@ -1,15 +1,24 @@
-![3d outline](https://user-images.githubusercontent.com/18412636/45466279-bec60700-b6cd-11e8-9144-7343b420b459.jpg)
+<!-- HEADING -->
 
-[![Build Status](https://travis-ci.org/AztecGameLab/AztecGameLaboratory.svg?branch=master)](https://travis-ci.org/AztecGameLab/AztecGameLaboratory)
+![AGL_LOGO](https://user-images.githubusercontent.com/10361542/45460107-6f251280-b6b0-11e8-928e-e2cf657ba6cc.png)
 
-## Quick Start
+<!-- DESCRIPTION -->
 
-Follow these instructions to start development and our optimal work flow.
+<p align="center">
+  <strong>SDSU's Game Development Club's website.</strong><br>
+  Created with <a href="https://reactjs.org/" target="_blank">React.js</a> and <a href="https://nodejs.org/en/" target="_blank">Node.js</a>.
+</p>
 
-# Installation
+<!-- SHIELDS:IO -->
+
+[![Build Status](https://travis-ci.org/AztecGameLab/AztecGameLaboratory.svg?branch=test%2Fkdo%2Ftravis-ci)](https://travis-ci.org/AztecGameLab/AztecGameLaboratory)
+
+<!-- SETTING UP -->
+
+## <span role="img" aria-label="Sparkles">✨</span> Setting Up
 
 1. Install [VSCode](https://code.visualstudio.com/)
-2. Enable format on save (Preferences -> Search "on save" -> Formatting -> Settings)
+2. Enable format on save (File -> Preferences -> Settings -> Search Bar -> "Format on Save" -> ✔️️)
 
 ![here](https://i.imgur.com/67AO4Pf.png)
 
@@ -17,20 +26,26 @@ Follow these instructions to start development and our optimal work flow.
 4. Install [GitKraken](https://www.gitkraken.com/)
 5. Install [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)
 6. Install [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
-7. Install [Node](https://nodejs.org/en/)
-8. Install [Yarn](https://yarnpkg.com/en/)
+7. Install/Update [Node](https://nodejs.org/en/)
+8. Install/Update [Yarn](https://yarnpkg.com/en/)
 
-# Development
+<!-- QUICK START -->
+
+## <span role="img" aria-label="Sparkles">✨</span> Quick Start
 
 Refer to the `package.json` for scripts
 
-1. Clone this repository
-2. `yarn`
-3. `yarn start`
+1. Clone this repository `git clone https://github.com/aztecgamelab/aztecgamelaboratory`
+2. Install/Update packages needed `yarn`
+3. Create a `.env` file at the root of the project
+4. Please ping **Kevin** or **Andrew** for the private gist to obtain the keys for the `.env` file
+5. Start development on your local server `yarn start`
 
-Please [visit the tutorial](https://github.com/AztecGameLab/AztecGameLaboratory/wiki/Tutorial) to learn some basics and how to contribute.
+Please [visit the tutorial](https://github.com/AztecGameLab/AztecGameLaboratory/wiki/Tutorial) to learn some basics and how to contribute!
 
-## Last Updated
+<!-- LAST UPDATED -->
 
--   Last updated: September 12, 2018 by Kevin Do
--   Please update this date when README is edited
+## <span role="img" aria-label="Sparkles">✨</span> Last Updated
+
+- **Last updated:** September 14, 2018 by AC De Leon
+- **Please update this date when README is edited!**
