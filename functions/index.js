@@ -16,17 +16,25 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 });
 
 exports.createUserDocument = functions.auth.user().onCreate(user => {
-    const { disabled, displayName, email, emailVerified, photoURL, providerData, uid } = user;
+    const { customClaims, disabled, displayName, email, emailVerified, photoURL, uid } = user;
+    const { creationTime } = user.metadata;
+    const { displayName: providerName, email: providerEmail, photoURL: providerPhotoURL, providerId, uid: providerUid } = user.providerData[0];
     firestore
         .collection("users")
         .doc(user.uid)
         .set({
+            customClaims,
             disabled,
             displayName,
             email,
             emailVerified,
             photoURL,
-            providerData,
-            uid
+            uid,
+            creationTime,
+            providerName,
+            providerEmail,
+            providerPhotoURL,
+            providerId,
+            providerUid
         });
 });

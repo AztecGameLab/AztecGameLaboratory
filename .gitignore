@@ -22,3 +22,5 @@ yarn-debug.log*
 yarn-error.log*
 
 /functions/node_modules
+
+*.log
