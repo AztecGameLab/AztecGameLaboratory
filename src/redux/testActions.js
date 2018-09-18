@@ -12,6 +12,20 @@ export const kevinAction = () => {
   };
 };
 
+export const jinAction = () => {
+  return {
+    type: "JIN",
+    payload: "two times"
+  };
+};
+
+export const jinAction2 = () => {
+  return {
+    type: "JIN2",
+    payload: "lul"
+  };
+};
+
 export const acAction = () => {
   return {
     type: "AC",

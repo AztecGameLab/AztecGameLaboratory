@@ -8,6 +8,10 @@ export default (state = initialState, action) => {
       return { test: "Hello Redux" };
     case "KEVIN":
       return { test: "KEVIN WAS HERE" };
+    case "JIN":
+      return { test: "YAHOO" };
+    case "JIN2":
+      return { test: "HE SAID IT" };
     case "AC":
       return { test: "testReducer by AC" };
     default:
