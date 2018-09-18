@@ -12,6 +12,8 @@ export default (state = initialState, action) => {
       return { test: "YAHOO" };
     case "JIN2":
       return { test: "HE SAID IT" };
+    case "AC":
+      return { test: "testReducer by AC" };
     default:
       return state;
   }

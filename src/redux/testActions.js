@@ -25,3 +25,10 @@ export const jinAction2 = () => {
     payload: "lul"
   };
 };
+
+export const acAction = () => {
+  return {
+    type: "AC",
+    payload: "GET ON THE PAYLOAD!"
+  };
+};
