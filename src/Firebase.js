@@ -14,8 +14,6 @@ let config = {
 };
 firebase.initializeApp(config);
 // Firebase date/timestamp fix
-const firestore = firebase.firestore();
-const settings = { timestampsInSnapshots: true };
-firestore.settings(settings);
+firebase.firestore().settings({ timestampsInSnapshots: true });
 
 export default firebase;
