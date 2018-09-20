@@ -5,11 +5,13 @@ import { store } from "./redux/configStore";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 
-ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
+import "semantic-ui-css/semantic.min.css";
 
-    document.getElementById("root")
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+
+  document.getElementById("root")
 );
 registerServiceWorker();
