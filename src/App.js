@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
-import { Button, Grid } from "semantic-ui-react";
+// Styling
+import { Button, Grid, Segment } from "semantic-ui-react";
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -32,14 +33,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Grid columns={3} padded style={{ height: "100vh" }}>
-          <Grid.Row>
-            <Grid.Column>
-              <Button>Chat</Button>
-            </Grid.Column>
-            <Grid.Column>
-              <Grid.Row style={{ height: "50%" }}>
+        <Grid celled columns={3} padded stackable style={{ height: "100vh" }}>
+          <Grid.Column className="Chat">
+            <Segment>
+              <Button fluid>Chat</Button>
+            </Segment>
+          </Grid.Column>
+          <Grid.Column>
+            <Grid.Row className="Announcements" style={{ height: "50vh" }}>
+              <Segment>
                 <header className="App-header">
+                  <Button fluid>Announcements</Button>
                   <h1 className="App-title" align="center">
                     Welcome to the Aztec Game Lab!
                   </h1>
@@ -48,15 +52,19 @@ class App extends Component {
                     firebaseAuth={firebase.auth()}
                   />
                 </header>
-              </Grid.Row>
-              <Grid.Row style={{ height: "50%" }}>
-                <Button>Poll</Button>
-              </Grid.Row>
-            </Grid.Column>
-            <Grid.Column>
-              <Button>Feed</Button>
-            </Grid.Column>
-          </Grid.Row>
+              </Segment>
+            </Grid.Row>
+            <Grid.Row className="Poll">
+              <Segment>
+                <Button fluid>Poll</Button>
+              </Segment>
+            </Grid.Row>
+          </Grid.Column>
+          <Grid.Column className="Feed">
+            <Segment>
+              <Button fluid>Feed</Button>
+            </Segment>
+          </Grid.Column>
         </Grid>
       </div>
     );
