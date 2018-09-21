@@ -8,22 +8,25 @@ import { connect } from "react-redux";
 //import { getEventsFromInput, createCallable } from "./utils";
 
 class Greeter extends Component {
-  render() {
-    return <Greeting profile={this.props.profile} />;
-  }
+    render() {
+        return <Greeting profile={this.props.profile} />;
+    }
 }
 
 function Greeting(profile) {
-  if (profile) {
-    return <h3>Hello, {profile.profile.displayName}!</h3>;
-  }
-  return <h3>Please Login:</h3>;
+    if (profile) {
+        return <h3>Hello, {profile.profile.displayName}!</h3>;
+    }
+    return <h3>Please Login:</h3>;
 }
 
+const mapStateToProps = state => {
+    return {
+        userList: state.firestore.data.users,
+        profile: state.firebase.profile, // pass profile data as this.props.profile
+        auth: state.firebase.auth // pass auth data as this.props.auth
+    };
+};
+
 // listener for users collection
-export default //firestoreConnect(["users"]), // sync users collection from Firestore into redux
-connect(state => ({
-  userList: state.firestore.data.users,
-  profile: state.firebase.profile, // pass profile data as this.props.profile
-  auth: state.firebase.auth // pass auth data as this.props.auth
-}))(Greeter);
+export default connect(mapStateToProps)(Greeter);

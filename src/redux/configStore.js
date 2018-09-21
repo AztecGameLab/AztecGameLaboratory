@@ -2,7 +2,7 @@ import { createStore, compose } from "redux";
 import { reactReduxFirebase } from "react-redux-firebase";
 import { reduxFirestore } from "redux-firestore";
 import rootReducer from "./rootReducer";
-import firebase from "../Firebase"; // Firebase initialization
+import firebase from "../firebaseConfig"; // Firebase initialization
 
 // Configure reduxFirestore
 let rfConfig = {

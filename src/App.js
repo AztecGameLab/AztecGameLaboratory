@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import firebase from "./Firebase";
+import firebase from "./firebaseConfig";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import Greeter from "./Greeter.js";
 
@@ -10,6 +10,7 @@ let uiConfig = {
   // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
   signInSuccessUrl: "/signedIn",
   // We will display Google and Facebook as auth providers.
+
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     firebase.auth.GithubAuthProvider.PROVIDER_ID,
@@ -24,10 +25,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to Aztec Game Lab</h1>
         </header>
         <Greeter />
-        <StyledFirebaseAuth
-          uiConfig={uiConfig}
-          firebaseAuth={firebase.auth()}
-        />
+        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
       </div>
     );
   }
