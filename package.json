@@ -12,7 +12,9 @@
     "react-scripts": "1.1.5",
     "redux": "^4.0.0",
     "redux-firestore": "^0.5.8",
-    "reselect": "^3.0.1"
+    "reselect": "^3.0.1",
+    "semantic-ui-css": "^2.4.0",
+    "semantic-ui-react": "^0.82.5"
   },
   "scripts": {
     "start": "react-scripts start",
