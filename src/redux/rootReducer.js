@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import testData from "./testReducer";
+import { firestoreReducer } from "redux-firestore";
+import { firebaseReducer } from "react-redux-firebase";
 
 export default combineReducers({
-    testData
+    firebase: firebaseReducer,
+    firestore: firestoreReducer
 });
