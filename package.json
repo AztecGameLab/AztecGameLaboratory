@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@pusher/chatkit": "^0.7.17",
     "firebase": "^5.4.2",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
@@ -13,9 +14,7 @@
     "react-scripts": "1.1.5",
     "redux": "^4.0.0",
     "redux-firestore": "^0.5.8",
-    "reselect": "^3.0.1",
-    "semantic-ui-css": "^2.4.0",
-    "semantic-ui-react": "^0.82.5"
+    "reselect": "^3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

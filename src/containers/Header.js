@@ -10,13 +10,14 @@ class Header extends Component {
         <Link to={"/games"}>Games</Link>
         <Link to={"/art"}>Art</Link>
         <Link to={"/music"}>Music</Link>
+        <Link to={"/chat"}>Chat</Link>
       </header>
     );
   }
 }
 
-const HeaderDropDown = () => {
+/* const HeaderDropDown = () => {
   return <p> you are logged in as: </p>;
-};
+}; */
 
 export default Header;

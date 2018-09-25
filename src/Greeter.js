@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-//import { selectCurUsername } from "./redux/testSelector";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 //import firebase from "./Firebase";
-//import { watchEvents, unWatchEvents } from "./actions/query";
-//import { getEventsFromInput, createCallable } from "./utils";
 
 class Greeter extends Component {
   render() {
