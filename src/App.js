@@ -4,7 +4,7 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import ACDeLeonTutorial from "./tutorial/tut-adeleon/Tutorial";
 import KevinDoTutorial from "./tutorial/tut-kdo/Tutorial";
 import JinZouTutorial from "./tutorial/tut-jzou/Tutorial";
-
+import MiguelDoTutorial from "./tutorial/tut-mcampos/Tutorial";
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -42,6 +42,7 @@ class App extends Component {
         />
         <KevinDoTutorial />
         <JinZouTutorial />
+        <MiguelDoTutorial />
         <ACDeLeonTutorial />
       </div>
     );
