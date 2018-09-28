@@ -7,8 +7,6 @@ import { BrowserRouter } from "react-router-dom";
 
 import registerServiceWorker from "./registerServiceWorker";
 
-import "semantic-ui-css/semantic.min.css";
-
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
