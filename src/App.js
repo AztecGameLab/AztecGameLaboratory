@@ -40,7 +40,7 @@ class App extends Component {
           firebaseAuth={firebase.auth()}
         />
         <KevinDoTutorial />
-        <JustinRabeTutorial />
+        <JustinRabeTutorial name={"Timmy"} />
       </div>
     );
   }
