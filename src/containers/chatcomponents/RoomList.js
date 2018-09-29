@@ -6,14 +6,13 @@ class RoomList extends Component {
       const { name } = rooms[roomId];
       return (
         <div key={roomId}>
-          <p>{name}</p>
+          <button>{name}</button>
         </div>
       );
     });
   };
 
   render() {
-    console.log(this.props.rooms);
     const { rooms } = this.props;
     return <div>{rooms ? this.renderRooms(rooms) : "Loading..."}</div>;
   }

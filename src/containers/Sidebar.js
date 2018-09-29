@@ -1,11 +1,15 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import firebase from "../firebaseConfig";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import ChatContainer from "./ChatContainer";
+
+import { isLoggedIn } from "../redux/selectors";
 
 // Configure FirebaseUI
 let uiConfig = {
   signInFlow: "popup",
-  signInSuccessUrl: "/signedIn",
+  signInSuccessUrl: "/",
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     firebase.auth.GithubAuthProvider.PROVIDER_ID,
@@ -15,12 +19,23 @@ let uiConfig = {
 
 class Sidebar extends Component {
   render() {
+    const { isLoggedIn } = this.props;
     return (
       <div>
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+        {isLoggedIn ? (
+          <ChatContainer />
+        ) : (
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+        )}
       </div>
     );
   }
 }
 
-export default Sidebar;
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: isLoggedIn(state)
+  };
+};
+
+export default connect(mapStateToProps)(Sidebar);

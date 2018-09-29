@@ -9,7 +9,6 @@ class ArtGrid extends Component {
   renderArtwork = art => {
     return Object.keys(art).map(artID => {
       const { displayName, photoURL } = art[artID].owner;
-      console.log(art[artID].url);
       return (
         <div key={artID}>
           <h1>{art[artID].title}</h1>
@@ -24,7 +23,6 @@ class ArtGrid extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { art } = this.props;
     return <div>{art ? this.renderArtwork(art) : "loading..."}</div>;
   }

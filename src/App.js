@@ -8,10 +8,10 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <span>
+        <div style={{ display: "flex", flexDirection: "row" }}>
           <Sidebar />
           <MainPanel />
-        </span>
+        </div>
       </div>
     );
   }

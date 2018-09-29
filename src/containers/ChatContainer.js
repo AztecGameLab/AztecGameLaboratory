@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getUserUID } from "../redux/selectors";
 import { ChatManager, TokenProvider } from "@pusher/chatkit";
-
 import MessageList from "./chatcomponents/MessageList";
 import SendMessageForm from "./chatcomponents/SendMessageForm";
 import RoomList from "./chatcomponents/RoomList";
@@ -21,10 +22,11 @@ class ChatContainer extends Component {
   }
 
   componentDidMount() {
+    const { uid } = this.props;
     // Chatkit vars initialization
     const chatManager = new ChatManager({
       instanceLocator: process.env.REACT_APP_CHATKIT_INSTANCE_LOCATOR,
-      userId: "test",
+      userId: uid,
       tokenProvider: new TokenProvider({
         url: process.env.REACT_APP_CHATKIT_TEST_TOKEN
       })
@@ -39,7 +41,6 @@ class ChatContainer extends Component {
         this.setState({
           user: currentUser
         });
-        //console.log(this.state.user);
         currentUser.subscribeToRoom({
           roomId: roomId,
           hooks: {
@@ -65,7 +66,6 @@ class ChatContainer extends Component {
   }
 
   render() {
-    //console.log(this.state.user);
     return (
       <div>
         <Title />
@@ -81,4 +81,10 @@ function Title() {
   return <h2>Chat:</h2>;
 }
 
-export default ChatContainer;
+const mapStateToProps = state => {
+  return {
+    uid: getUserUID(state)
+  };
+};
+
+export default connect(mapStateToProps)(ChatContainer);
