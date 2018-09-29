@@ -14,11 +14,13 @@ class RoomList extends Component {
   };
 
   render() {
-    const { rooms } = this.props;
+    const { joinableRooms, rooms } = this.props;
     return (
       <div>
         Your rooms:
         {rooms ? this.renderRooms(rooms) : "Loading..."}
+        Joinable rooms:
+        {joinableRooms ? this.renderRooms(joinableRooms) : "Loading..."}
       </div>
     );
   }

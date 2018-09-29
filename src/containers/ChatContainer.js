@@ -10,7 +10,8 @@ class ChatContainer extends Component {
   state = {
     currentUser: {},
     messages: [],
-    roomId: 16925280
+    roomId: 16925280,
+    joinableRooms: []
   };
 
   componentDidMount() {
@@ -29,8 +30,10 @@ class ChatContainer extends Component {
     chatManager
       .connect()
       .then(currentUser => {
-        this.setState({ currentUser });
-        return this.joinRoom(roomId);
+        currentUser.getJoinableRooms().then(rooms => {
+          this.setState({ currentUser, joinableRooms: rooms, allUsers: currentUser.users });
+          return this.joinRoom(roomId);
+        });
       })
       .then(currentRoom => {
         this.setState({ currentRoom });
@@ -64,12 +67,25 @@ class ChatContainer extends Component {
     });
   };
 
+  addPersonToRoom = userId => {
+    const { currentUser, roomId } = this.state;
+    currentUser.addPersonToRoom({
+      userId,
+      roomId
+    });
+  };
+
   render() {
-    const { currentUser, messages } = this.state;
+    const { currentUser, joinableRooms, messages } = this.state;
+    console.log("USERS: ", currentUser ? currentUser.users : "none lol");
     return (
       <div>
         <Title />
-        <RoomList rooms={currentUser.rooms} joinRoom={this.joinRoom} />
+        <RoomList
+          rooms={currentUser.rooms}
+          joinableRooms={joinableRooms}
+          joinRoom={this.joinRoom}
+        />
         <MessageList messages={messages} />
         <SendMessageForm sendMessage={this.sendMessage} />
       </div>
