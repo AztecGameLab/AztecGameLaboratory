@@ -3,16 +3,18 @@ import { ChatManager, TokenProvider } from "@pusher/chatkit";
 
 import MessageList from "./chatcomponents/MessageList";
 import SendMessageForm from "./chatcomponents/SendMessageForm";
+import RoomList from "./chatcomponents/RoomList";
 
 // Hardcoded room values for testing
 const roomId = 16925280;
-var user = {};
+//var user = {};
 
 class ChatContainer extends Component {
   //TODO: Convert message sending and fetching into redux
   constructor() {
     super();
     this.state = {
+      user: {},
       messages: []
     };
     this.sendMessage = this.sendMessage.bind(this);
@@ -34,7 +36,10 @@ class ChatContainer extends Component {
       .then(currentUser => {
         // currentUser obj contains methods for current user to perform
         // Important to store user to outer scope so React is able to access user obj
-        user = currentUser;
+        this.setState({
+          user: currentUser
+        });
+        //console.log(this.state.user);
         currentUser.subscribeToRoom({
           roomId: roomId,
           hooks: {
@@ -53,16 +58,18 @@ class ChatContainer extends Component {
 
   //User post message
   sendMessage(msg) {
-    user.sendMessage({
+    this.state.user.sendMessage({
       text: msg,
       roomId: roomId
     });
   }
 
   render() {
+    //console.log(this.state.user);
     return (
       <div>
         <Title />
+        <RoomList rooms={this.state.user.rooms} />
         <MessageList messages={this.state.messages} />
         <SendMessageForm sendMessage={this.sendMessage} />
       </div>
