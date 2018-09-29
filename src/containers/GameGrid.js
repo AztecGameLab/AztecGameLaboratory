@@ -9,7 +9,6 @@ class GameGrid extends Component {
   renderGames = games => {
     return Object.keys(games).map(gameID => {
       const { displayName, photoURL } = games[gameID].owner;
-      console.log(this.props.users);
       return (
         <div key={gameID}>
           <h1>{games[gameID].title}</h1>
@@ -24,7 +23,6 @@ class GameGrid extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { games } = this.props;
     return <div>{games ? this.renderGames(games) : "hi"}</div>;
   }

@@ -1,28 +1,26 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getUserUID } from "../redux/selectors";
 import { ChatManager, TokenProvider } from "@pusher/chatkit";
-
 import MessageList from "./chatcomponents/MessageList";
 import SendMessageForm from "./chatcomponents/SendMessageForm";
-
-// Hardcoded room values for testing
-const roomId = 16925280;
-var user = {};
+import RoomList from "./chatcomponents/RoomList";
 
 class ChatContainer extends Component {
-  //TODO: Convert message sending and fetching into redux
-  constructor() {
-    super();
-    this.state = {
-      messages: []
-    };
-    this.sendMessage = this.sendMessage.bind(this);
-  }
+  state = {
+    currentUser: {},
+    messages: [],
+    roomId: 16925280,
+    joinableRooms: []
+  };
 
   componentDidMount() {
+    const { uid } = this.props;
+    const { roomId } = this.state;
     // Chatkit vars initialization
     const chatManager = new ChatManager({
       instanceLocator: process.env.REACT_APP_CHATKIT_INSTANCE_LOCATOR,
-      userId: "test",
+      userId: uid,
       tokenProvider: new TokenProvider({
         url: process.env.REACT_APP_CHATKIT_TEST_TOKEN
       })
@@ -32,38 +30,63 @@ class ChatContainer extends Component {
     chatManager
       .connect()
       .then(currentUser => {
-        // currentUser obj contains methods for current user to perform
-        // Important to store user to outer scope so React is able to access user obj
-        user = currentUser;
-        currentUser.subscribeToRoom({
-          roomId: roomId,
-          hooks: {
-            onNewMessage: message => {
-              this.setState({
-                messages: [...this.state.messages, message]
-              });
-            }
-          }
+        currentUser.getJoinableRooms().then(rooms => {
+          this.setState({ currentUser, joinableRooms: rooms, allUsers: currentUser.users });
+          return this.joinRoom(roomId);
         });
       })
-      .catch(error => {
-        console.log("error:", error);
+      .then(currentRoom => {
+        this.setState({ currentRoom });
       });
   }
 
   //User post message
-  sendMessage(msg) {
-    user.sendMessage({
+  sendMessage = msg => {
+    const { currentUser, roomId } = this.state;
+    currentUser.sendMessage({
       text: msg,
       roomId: roomId
     });
-  }
+  };
+
+  joinRoom = roomId => {
+    const { currentUser } = this.state;
+    this.setState({
+      messages: [],
+      roomId
+    });
+    return currentUser.subscribeToRoom({
+      roomId: roomId,
+      hooks: {
+        onNewMessage: message => {
+          this.setState({
+            messages: [...this.state.messages, message]
+          });
+        }
+      }
+    });
+  };
+
+  addPersonToRoom = userId => {
+    const { currentUser, roomId } = this.state;
+    currentUser.addPersonToRoom({
+      userId,
+      roomId
+    });
+  };
 
   render() {
+    const { currentUser, joinableRooms, messages } = this.state;
+    console.log("USERS: ", currentUser ? currentUser.users : "none lol");
     return (
       <div>
         <Title />
-        <MessageList messages={this.state.messages} />
+        <RoomList
+          rooms={currentUser.rooms}
+          joinableRooms={joinableRooms}
+          joinRoom={this.joinRoom}
+        />
+        <MessageList messages={messages} />
         <SendMessageForm sendMessage={this.sendMessage} />
       </div>
     );
@@ -74,4 +97,10 @@ function Title() {
   return <h2>Chat:</h2>;
 }
 
-export default ChatContainer;
+const mapStateToProps = state => {
+  return {
+    uid: getUserUID(state)
+  };
+};
+
+export default connect(mapStateToProps)(ChatContainer);

@@ -24,3 +24,5 @@ yarn-error.log*
 /functions/node_modules
 
 *.log
+
+*.cache
