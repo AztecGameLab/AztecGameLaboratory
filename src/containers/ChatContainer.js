@@ -6,23 +6,16 @@ import MessageList from "./chatcomponents/MessageList";
 import SendMessageForm from "./chatcomponents/SendMessageForm";
 import RoomList from "./chatcomponents/RoomList";
 
-// Hardcoded room values for testing
-const roomId = 16925280;
-//var user = {};
-
 class ChatContainer extends Component {
-  //TODO: Convert message sending and fetching into redux
-  constructor() {
-    super();
-    this.state = {
-      user: {},
-      messages: []
-    };
-    this.sendMessage = this.sendMessage.bind(this);
-  }
+  state = {
+    currentUser: {},
+    messages: [],
+    roomId: 16925280
+  };
 
   componentDidMount() {
     const { uid } = this.props;
+    const { roomId } = this.state;
     // Chatkit vars initialization
     const chatManager = new ChatManager({
       instanceLocator: process.env.REACT_APP_CHATKIT_INSTANCE_LOCATOR,
@@ -36,41 +29,48 @@ class ChatContainer extends Component {
     chatManager
       .connect()
       .then(currentUser => {
-        // currentUser obj contains methods for current user to perform
-        // Important to store user to outer scope so React is able to access user obj
-        this.setState({
-          user: currentUser
-        });
-        currentUser.subscribeToRoom({
-          roomId: roomId,
-          hooks: {
-            onNewMessage: message => {
-              this.setState({
-                messages: [...this.state.messages, message]
-              });
-            }
-          }
-        });
+        this.setState({ currentUser });
+        return this.joinRoom(roomId);
       })
-      .catch(error => {
-        console.log("error:", error);
+      .then(currentRoom => {
+        this.setState({ currentRoom });
       });
   }
 
   //User post message
-  sendMessage(msg) {
-    this.state.user.sendMessage({
+  sendMessage = msg => {
+    const { currentUser, roomId } = this.state;
+    currentUser.sendMessage({
       text: msg,
       roomId: roomId
     });
-  }
+  };
+
+  joinRoom = roomId => {
+    const { currentUser } = this.state;
+    this.setState({
+      messages: [],
+      roomId
+    });
+    return currentUser.subscribeToRoom({
+      roomId: roomId,
+      hooks: {
+        onNewMessage: message => {
+          this.setState({
+            messages: [...this.state.messages, message]
+          });
+        }
+      }
+    });
+  };
 
   render() {
+    const { currentUser, messages } = this.state;
     return (
       <div>
         <Title />
-        <RoomList rooms={this.state.user.rooms} />
-        <MessageList messages={this.state.messages} />
+        <RoomList rooms={currentUser.rooms} joinRoom={this.joinRoom} />
+        <MessageList messages={messages} />
         <SendMessageForm sendMessage={this.sendMessage} />
       </div>
     );

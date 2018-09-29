@@ -2,11 +2,12 @@ import React, { Component } from "react";
 
 class RoomList extends Component {
   renderRooms = rooms => {
-    return Object.keys(rooms).map(roomId => {
-      const { name } = rooms[roomId];
+    return rooms.map(room => {
+      const { name, id } = room;
+      const { joinRoom } = this.props;
       return (
-        <div key={roomId}>
-          <button>{name}</button>
+        <div key={id}>
+          <button onClick={() => joinRoom(id)}>{name}</button>
         </div>
       );
     });
@@ -14,7 +15,12 @@ class RoomList extends Component {
 
   render() {
     const { rooms } = this.props;
-    return <div>{rooms ? this.renderRooms(rooms) : "Loading..."}</div>;
+    return (
+      <div>
+        Your rooms:
+        {rooms ? this.renderRooms(rooms) : "Loading..."}
+      </div>
+    );
   }
 }
 
