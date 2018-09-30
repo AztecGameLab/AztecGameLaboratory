@@ -13,6 +13,32 @@
 
 [![Build Status](https://travis-ci.org/AztecGameLab/AztecGameLaboratory.svg?branch=test%2Fkdo%2Ftravis-ci)](https://travis-ci.org/AztecGameLab/AztecGameLaboratory)
 
+<!-- GENERAL INFORMATION -->
+
+## <span role="img" aria-label="Sparkles">✨</span> General Information
+
+### <span role="img" aria-label="Clipboard">📋</span> [Visit our Wiki](https://github.com/AztecGameLab/AztecGameLaboratory/wiki)
+
+### <span role="img" aria-label="Laptop">💻</span> [Contributing Workflow](https://github.com/AztecGameLab/AztecGameLaboratory/wiki/Workflow-Guide)
+
+### <span role="img" aria-label="Pancakes">🥞</span> Tech Stack
+
+-   Frontend
+    -   React.js
+    -   Redux
+    -   Reselect
+    -   React-Redux
+    -   Redux-Firestore
+    -   React-Redux-Firebase
+-   Backend
+    -   Firebase Firestore
+    -   Firebase Functions
+    -   Pusher Chatkit
+-   Continuous Integration & Testing
+    -   TravisCI
+    -   Jest
+    -   Enzyme
+
 <!-- SETTING UP -->
 
 ## <span role="img" aria-label="Sparkles">✨</span> Setting Up
@@ -47,5 +73,5 @@ Please [visit the tutorial](https://github.com/AztecGameLab/AztecGameLaboratory/
 
 ## <span role="img" aria-label="Sparkles">✨</span> Last Updated
 
-- **Last updated:** September 14, 2018 by AC De Leon
-- **Please update this date when README is edited!**
+-   **Last updated:** September 30, 2018 by Kevin Do
+-   **Please update this date when README is edited!**
