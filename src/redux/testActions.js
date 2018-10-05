@@ -11,6 +11,12 @@ export const kevinAction = () => {
     payload: "hehe xd"
   };
 };
+export const justinAction = () => {
+  return {
+    type: "JUSTIN",
+    payload: "lul"
+  };
+};
 
 export const jinAction = () => {
   return {
