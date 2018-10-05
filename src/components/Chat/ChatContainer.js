@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getUserUID } from "../redux/selectors";
+import { getUserUID } from "../../redux/selectors";
 import { ChatManager, TokenProvider } from "@pusher/chatkit";
-import MessageList from "./chatcomponents/MessageList";
-import SendMessageForm from "./chatcomponents/SendMessageForm";
-import RoomList from "./chatcomponents/RoomList";
+import MessageList from "./MessageList";
+import SendMessageForm from "./SendMessageForm";
+import RoomList from "./RoomList";
 
 class ChatContainer extends Component {
   state = {

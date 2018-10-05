@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
-import Thumbnail from "../shared-components/Thumbnail";
-import Avatar from "../shared-components/Avatar";
+import Thumbnail from "../../sharedComponents/Thumbnail";
+import Avatar from "../../sharedComponents/Avatar";
 
 class GameGrid extends Component {
   renderGames = games => {
