@@ -18,22 +18,12 @@ class UserSettings extends Component {
     });
   };
 
-  handleUpdateProfile = e => {
-    e.preventDefault();
-    console.log("Profile updated.");
+  handleUsername = e => {
+    console.log("Username changed.");
   };
 
   handleDeleteAccount = e => {
     console.log("Account deleted.");
-  };
-
-  handlePassword = e => {
-    e.preventDefault();
-    console.log("Password updated.");
-  };
-
-  handleUsername = e => {
-    console.log("Username changed.");
   };
 
   render() {
@@ -44,28 +34,12 @@ class UserSettings extends Component {
         {isLoggedIn ? (
           <div>
             <h1>PROFILE</h1>
-            {/* onSubmit vs onClick? */}
-            {/* Are we handling the avatar itself, can we call on firebase api? */}
             <form onSubmit={this.handleUpdateProfile}>
               <label htmlFor="avatar">Avatar</label>
-              {/* How to check if it's a valid picture format */}
               <input type="file" onChange={this.handleAvatar} />
               <img src={this.state.avatar} alt="" />
-              <label htmlFor="bio">Bio:</label>
-              <input type="text" id="bio" />
-              <button>Update profile</button>
             </form>
             <h1>ACCOUNT</h1>
-            <h2>Change password</h2>
-            <form onSubmit={this.handlePassword}>
-              <label htmlFor="oldPassword">Old Password:</label>
-              <input type="text" id="oldPassword" onChange={this.handleChange} />
-              <br />
-              <label htmlFor="newPassword">New Password:</label>
-              <input type="text" id="newPassword" onChange={this.handleChange} />
-              <br />
-              <button>Update password</button>
-            </form>
             <h2>Change username</h2>
             <button
               id="username"
