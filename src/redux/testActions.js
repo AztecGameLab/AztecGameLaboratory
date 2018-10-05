@@ -38,3 +38,10 @@ export const acAction = () => {
     payload: "GET ON THE PAYLOAD!"
   };
 };
+
+export const miguelAction = () => {
+  return {
+    type: "MIGUEL",
+    payload: "+1 builder!"
+  };
+};
