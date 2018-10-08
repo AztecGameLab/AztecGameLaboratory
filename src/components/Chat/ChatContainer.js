@@ -5,13 +5,16 @@ import { ChatManager, TokenProvider } from "@pusher/chatkit";
 import MessageList from "./MessageList";
 import SendMessageForm from "./SendMessageForm";
 import RoomList from "./RoomList";
+import CreateJoinButton from "./CreateJoinButton";
+import CreateJoinModal from "./CreateJoinModal";
 
 class ChatContainer extends Component {
   state = {
     currentUser: {},
     messages: [],
     roomId: 16925280,
-    joinableRooms: []
+    joinableRooms: [],
+    isCJModalOpen: false
   };
 
   componentDidMount() {
@@ -75,12 +78,22 @@ class ChatContainer extends Component {
     });
   };
 
+  showCJModal = () => {
+    this.setState({ isCJModalOpen: true });
+  };
+
+  hideCJModal = () => {
+    this.setState({ isCJModalOpen: false });
+  };
+
   render() {
-    const { currentUser, joinableRooms, messages } = this.state;
-    console.log("USERS: ", currentUser ? currentUser.users : "none lol");
+    const { currentUser, joinableRooms, messages, isCJModalOpen } = this.state;
+    //console.log("USERS: ", currentUser ? currentUser.users : "none lol");
     return (
       <div>
         <Title />
+        <CreateJoinModal isCJModalOpen={isCJModalOpen} hideCJModal={this.hideCJModal} />
+        <CreateJoinButton showCJModal={this.showCJModal} />
         <RoomList
           rooms={currentUser.rooms}
           joinableRooms={joinableRooms}
