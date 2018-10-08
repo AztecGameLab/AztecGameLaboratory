@@ -35,6 +35,7 @@ class ChatContainer extends Component {
       .then(currentUser => {
         currentUser.getJoinableRooms().then(rooms => {
           this.setState({ currentUser, joinableRooms: rooms, allUsers: currentUser.users });
+          this.props.sendData({ chatkitUser: currentUser });
           return this.joinRoom(roomId);
         });
       })
@@ -88,7 +89,7 @@ class ChatContainer extends Component {
 
   render() {
     const { currentUser, joinableRooms, messages, isCJModalOpen } = this.state;
-    //console.log("USERS: ", currentUser ? currentUser.users : "none lol");
+    // console.log("USERS: ", currentUser ? currentUser.users : "none lol");
     return (
       <div>
         <Title />
@@ -116,4 +117,15 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(ChatContainer);
+const mapDispatchToProps = dispatch => {
+  return {
+    sendData: data => {
+      dispatch({ type: "ADD_CHATKIT_USER", payload: data });
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChatContainer);
