@@ -4,6 +4,7 @@ import { withFirebase } from "react-redux-firebase";
 
 import { isLoggedIn } from "../redux/selectors";
 class UserSettings extends Component {
+  // These states keep the user input and translate it into Firebase
   state = {
     avatar: null,
     username: null
@@ -16,12 +17,6 @@ class UserSettings extends Component {
     e.target.reset();
   };
 
-  handlePreAvatar = e => {
-    // this.setState({
-    //   avatar: URL.createObjectURL(e.target.files[0])
-    // });
-  };
-
   handleUsername = e => {
     e.preventDefault();
     this.props.firebase.updateProfile({ displayName: this.state.username });
@@ -30,16 +25,14 @@ class UserSettings extends Component {
 
   handleDeleteAccount = e => {
     console.log(this.props.firebase);
-
     // Need to be able to delete account from auth & database
     // this.props.firebase.delete() does not work alongside re-auth-ing user
-
     console.log("End of function.");
   };
 
   handleChange = e => {
     this.setState({
-      // id is within the input method
+      // id is within the input method in the return()
       [e.target.id]: e.target.value
     });
   };
@@ -57,7 +50,7 @@ class UserSettings extends Component {
             {/* CURRENT AVATAR */}
             <img src={this.props.profile.photoURL} alt="" height="300" width="300" />
 
-            {/* CURRENT SETTINGS */}
+            {/* CURRENT SETTINGS PROTOTYPING */}
             <p>
               Name: {this.props.profile.displayName}
               <br />
