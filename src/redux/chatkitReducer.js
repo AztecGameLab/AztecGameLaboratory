@@ -1,10 +1,10 @@
-const initialState = { user: {} };
+const initialState = {};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_CHATKIT_USER":
+    case "SEND_JOINABLE_ROOMS":
       return {
-        user: action.payload
+        joinableRooms: action.payload
       };
     default:
       return state;

@@ -5,8 +5,9 @@ import CreateJoinContainer from "./CreateJoinContainer";
 
 class CreateJoinModal extends Component {
   render() {
-    const { isCJModalOpen, hideCJModal } = this.props;
+    const { isCJModalOpen, hideCJModal, joinRoom } = this.props;
 
+    // Use classnames library to parse CSS classes
     let showHideClassName = cx(styles.modal, {
       [styles["display-block"]]: isCJModalOpen,
       [styles["display-none"]]: !isCJModalOpen
@@ -16,7 +17,7 @@ class CreateJoinModal extends Component {
       <div className={showHideClassName}>
         <section className={styles["modal-main"]}>
           <button onClick={hideCJModal}>Close</button>
-          <CreateJoinContainer />
+          <CreateJoinContainer joinRoom={joinRoom} />
         </section>
       </div>
     );

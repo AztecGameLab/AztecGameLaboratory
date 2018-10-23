@@ -1,1 +1,1 @@
-export const addChatkitUser = data => ({ type: "ADD_CHATKIT_USER", payload: data });
+export const sendJoinableRooms = data => ({ type: "SEND_JOINABLE_ROOMS", payload: data });

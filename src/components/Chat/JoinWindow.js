@@ -1,18 +1,47 @@
+// Join room content container for modal
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getChatUserObj } from "../../redux/selectors";
+import { getJoinableRooms } from "../../redux/selectors";
+import RoomList from "./RoomList";
 
 class JoinWindow extends Component {
+  state = {
+    rooms: this.props.joinableRooms,
+    filteredRooms: []
+  };
+
+  componentWillMount() {
+    this.setState({
+      filteredRooms: this.state.rooms
+    });
+  }
+
+  // Filter rooms by name
+  filterRooms = event => {
+    var filteredRooms = this.state.rooms;
+    filteredRooms = filteredRooms.filter(room => {
+      return room.name.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1;
+    });
+    this.setState({ filteredRooms });
+  };
+
   render() {
-    const { user } = this.props;
-    console.log(user);
-    return <p>Join Window</p>;
+    const { joinRoom } = this.props;
+    const { filteredRooms } = this.state;
+    return (
+      <div>
+        <p>Join Window</p>
+        <input type="text" placeholder="Search for Rooms!" onChange={this.filterRooms} />
+        <RoomList joinRoom={joinRoom} rooms={filteredRooms} />
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    user: getChatUserObj(state)
+    joinableRooms: getJoinableRooms(state)
   };
 };
 

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { getUserUID } from "../../redux/selectors";
+import { sendJoinableRooms } from "../../redux/actions";
 import { ChatManager, TokenProvider } from "@pusher/chatkit";
 import MessageList from "./MessageList";
 import SendMessageForm from "./SendMessageForm";
@@ -12,14 +14,12 @@ class ChatContainer extends Component {
   state = {
     currentUser: {},
     messages: [],
-    roomId: 16925280,
-    joinableRooms: [],
+    roomId: 19017534,
     isCJModalOpen: false
   };
 
   componentDidMount() {
     const { uid } = this.props;
-    const { roomId } = this.state;
     // Chatkit vars initialization
     const chatManager = new ChatManager({
       instanceLocator: process.env.REACT_APP_CHATKIT_INSTANCE_LOCATOR,
@@ -30,21 +30,13 @@ class ChatContainer extends Component {
     });
 
     // Chatkit connect to server
-    chatManager
-      .connect()
-      .then(currentUser => {
-        currentUser.getJoinableRooms().then(rooms => {
-          this.setState({ currentUser, joinableRooms: rooms, allUsers: currentUser.users });
-          this.props.sendData({ chatkitUser: currentUser });
-          return this.joinRoom(roomId);
-        });
-      })
-      .then(currentRoom => {
-        this.setState({ currentRoom });
-      });
+    chatManager.connect().then(currentUser => {
+      this.setState({ currentUser });
+      return this.joinRoom(this.state.roomId);
+    });
   }
 
-  //User post message
+  // Post message to server using chatkit
   sendMessage = msg => {
     const { currentUser, roomId } = this.state;
     currentUser.sendMessage({
@@ -53,22 +45,28 @@ class ChatContainer extends Component {
     });
   };
 
+  // Have user join room and retrieve messages
+  // Issue: live updating of joinable rooms when clicked in join rooms
   joinRoom = roomId => {
     const { currentUser } = this.state;
     this.setState({
       messages: [],
       roomId
     });
-    return currentUser.subscribeToRoom({
-      roomId: roomId,
-      hooks: {
-        onNewMessage: message => {
-          this.setState({
-            messages: [...this.state.messages, message]
-          });
+    return currentUser
+      .subscribeToRoom({
+        roomId: roomId,
+        hooks: {
+          onNewMessage: message => {
+            this.setState({
+              messages: [...this.state.messages, message]
+            });
+          }
         }
-      }
-    });
+      })
+      .then(() => {
+        this.refreshJoinableRooms();
+      });
   };
 
   addPersonToRoom = userId => {
@@ -79,8 +77,19 @@ class ChatContainer extends Component {
     });
   };
 
+  // Refreshes list of joinable rooms of user
+  refreshJoinableRooms = () => {
+    const { currentUser } = this.state;
+    const { sendJoinableRooms } = this.props;
+    currentUser.getJoinableRooms().then(rooms => {
+      sendJoinableRooms(rooms);
+    });
+  };
+
+  // Toggle functions for opening create/join room modal
   showCJModal = () => {
     this.setState({ isCJModalOpen: true });
+    this.refreshJoinableRooms();
   };
 
   hideCJModal = () => {
@@ -88,18 +97,18 @@ class ChatContainer extends Component {
   };
 
   render() {
-    const { currentUser, joinableRooms, messages, isCJModalOpen } = this.state;
+    const { currentUser, messages, isCJModalOpen } = this.state;
     // console.log("USERS: ", currentUser ? currentUser.users : "none lol");
     return (
       <div>
         <Title />
-        <CreateJoinModal isCJModalOpen={isCJModalOpen} hideCJModal={this.hideCJModal} />
-        <CreateJoinButton showCJModal={this.showCJModal} />
-        <RoomList
-          rooms={currentUser.rooms}
-          joinableRooms={joinableRooms}
+        <CreateJoinModal
+          isCJModalOpen={isCJModalOpen}
+          hideCJModal={this.hideCJModal}
           joinRoom={this.joinRoom}
         />
+        <CreateJoinButton showCJModal={this.showCJModal} />
+        <RoomList rooms={currentUser.rooms} joinRoom={this.joinRoom} />
         <MessageList messages={messages} />
         <SendMessageForm sendMessage={this.sendMessage} />
       </div>
@@ -117,13 +126,13 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    sendData: data => {
-      dispatch({ type: "ADD_CHATKIT_USER", payload: data });
-    }
-  };
-};
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      sendJoinableRooms
+    },
+    dispatch
+  );
 
 export default connect(
   mapStateToProps,

@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 
 const selectAuth = state => state.firebase.auth;
-const getChatkitUser = state => state.chatkit.user;
+const selectJoinableRooms = state => state.chatkit.joinableRooms;
 
 export const isLoggedIn = createSelector([selectAuth], auth => {
   return auth && !!auth.uid;
@@ -11,6 +11,6 @@ export const getUserUID = createSelector([selectAuth], auth => {
   return auth.uid;
 });
 
-export const getChatUserObj = createSelector([getChatkitUser], user => {
-  return user.chatkitUser;
+export const getJoinableRooms = createSelector([selectJoinableRooms], joinableRooms => {
+  return joinableRooms;
 });
