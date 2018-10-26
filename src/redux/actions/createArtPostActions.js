@@ -11,7 +11,7 @@ export const createArtPost = art => {
         ...art,
         dateCreated: new Date(),
         hearts: 0,
-        owner: [profile.displayName, profile.photoURL]
+        owner: { displayName: profile.displayName, photoURL: profile.photoURL }
       })
       .then(() => {
         dispatch({
