@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withFirebase } from "react-redux-firebase";
 
 import { isLoggedIn } from "../redux/selectors";
-class UserSettings extends Component {
+import { createArtPost } from "../redux/actions/createArtPostActions";
+class CreatePost extends Component {
   state = {
     title: "",
     description: "",
@@ -20,6 +20,7 @@ class UserSettings extends Component {
     e.preventDefault();
     console.log(this.state);
     // Returns to the home page after creating a project
+    this.props.createArtPost(this.state);
     this.props.history.push("/");
   };
 
@@ -56,4 +57,13 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(withFirebase(UserSettings));
+const mapDispatchToProps = dispatch => {
+  return {
+    createArtPost: art => dispatch(createArtPost(art))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreatePost);
