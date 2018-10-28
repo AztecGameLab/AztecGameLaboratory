@@ -1,4 +1,5 @@
 // Join room content container for modal
+// TODO: Join rooms at once by allowing user to check multiple rooms to join
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -8,7 +9,8 @@ import RoomList from "./RoomList";
 class JoinWindow extends Component {
   state = {
     rooms: this.props.joinableRooms,
-    filteredRooms: []
+    filteredRooms: [],
+    selectedRooms: []
   };
 
   componentWillMount() {
@@ -16,6 +18,17 @@ class JoinWindow extends Component {
       filteredRooms: this.state.rooms
     });
   }
+
+  resetRooms = () => {
+    var newRooms = this.props.joinableRooms;
+    this.setState({
+      rooms: newRooms
+    }).then(() => {
+      this.setState({
+        filteredRooms: newRooms
+      });
+    });
+  };
 
   // Filter rooms by name
   filterRooms = event => {
@@ -26,6 +39,12 @@ class JoinWindow extends Component {
     this.setState({ filteredRooms });
   };
 
+  addToSelected = room => {
+    var selectedRooms = this.state.selectedRooms;
+    selectedRooms = selectedRooms.push(room);
+    this.setState({ selectedRooms });
+  };
+
   render() {
     const { joinRoom } = this.props;
     const { filteredRooms } = this.state;
@@ -33,7 +52,7 @@ class JoinWindow extends Component {
       <div>
         <p>Join Window</p>
         <input type="text" placeholder="Search for Rooms!" onChange={this.filterRooms} />
-        <RoomList joinRoom={joinRoom} rooms={filteredRooms} />
+        <RoomList joinRoom={joinRoom} rooms={filteredRooms} addToSelected={this.addToSelected} />
       </div>
     );
   }

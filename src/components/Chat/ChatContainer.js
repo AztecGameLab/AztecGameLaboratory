@@ -7,7 +7,6 @@ import { ChatManager, TokenProvider } from "@pusher/chatkit";
 import MessageList from "./MessageList";
 import SendMessageForm from "./SendMessageForm";
 import RoomList from "./RoomList";
-import CreateJoinButton from "./CreateJoinButton";
 import CreateJoinModal from "./CreateJoinModal";
 
 class ChatContainer extends Component {
@@ -53,20 +52,16 @@ class ChatContainer extends Component {
       messages: [],
       roomId
     });
-    return currentUser
-      .subscribeToRoom({
-        roomId: roomId,
-        hooks: {
-          onNewMessage: message => {
-            this.setState({
-              messages: [...this.state.messages, message]
-            });
-          }
+    return currentUser.subscribeToRoom({
+      roomId: roomId,
+      hooks: {
+        onNewMessage: message => {
+          this.setState({
+            messages: [...this.state.messages, message]
+          });
         }
-      })
-      .then(() => {
-        this.refreshJoinableRooms();
-      });
+      }
+    });
   };
 
   addPersonToRoom = userId => {
@@ -107,7 +102,7 @@ class ChatContainer extends Component {
           hideCJModal={this.hideCJModal}
           joinRoom={this.joinRoom}
         />
-        <CreateJoinButton showCJModal={this.showCJModal} />
+        <button onClick={this.showCJModal}>Create or Join</button>
         <RoomList rooms={currentUser.rooms} joinRoom={this.joinRoom} />
         <MessageList messages={messages} />
         <SendMessageForm sendMessage={this.sendMessage} />

@@ -15,7 +15,15 @@ class RoomList extends Component {
 
   render() {
     const { rooms } = this.props;
-    return <div>{rooms ? this.renderRooms(rooms) : "Loading..."}</div>;
+    return (
+      <div>
+        {rooms
+          ? rooms.length === 0
+            ? "No rooms to join!"
+            : this.renderRooms(rooms)
+          : "Loading..."}
+      </div>
+    );
   }
 }
 
