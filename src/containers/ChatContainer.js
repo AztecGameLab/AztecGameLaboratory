@@ -10,7 +10,7 @@ class ChatContainer extends Component {
   state = {
     currentUser: {},
     messages: [],
-    roomId: 16925280,
+    roomId: 19017534,
     joinableRooms: []
   };
 
@@ -77,7 +77,6 @@ class ChatContainer extends Component {
 
   render() {
     const { currentUser, joinableRooms, messages } = this.state;
-    console.log("USERS: ", currentUser ? currentUser.users : "none lol");
     return (
       <div>
         <Title />

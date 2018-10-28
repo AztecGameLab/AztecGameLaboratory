@@ -1,6 +1,7 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const Chatkit = require("@pusher/chatkit-server");
+const cors = require("cors")({ origin: true });
 
 // Initialize firestore
 admin.initializeApp();
@@ -54,4 +55,17 @@ exports.createChatkitAccount = functions.auth.user().onCreate(user => {
     .catch(err => {
       console.log(err);
     });
+});
+
+exports.updateChatkitAccount = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    return chatkit
+      .updateUser(req.body)
+      .then(() => {
+        return res.status(200).send(req.body, "User updated successfully");
+      })
+      .catch(err => {
+        return res.status(500).send(req.body, err);
+      });
+  });
 });

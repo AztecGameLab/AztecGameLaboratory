@@ -1,33 +1,55 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withFirebase } from "react-redux-firebase";
+import { isLoggedIn, getUserUID } from "../redux/selectors";
 
-import { isLoggedIn } from "../redux/selectors";
 class UserSettings extends Component {
   // These states keep the user input and translate it into Firebase
   state = {
-    avatar: null,
-    username: null
-    // deleteAccount: null
+    newAvatar: "",
+    newUsername: ""
   };
 
   handleAvatar = e => {
-    e.preventDefault();
-    this.props.firebase.updateProfile({ photoURL: this.state.avatar });
-    e.target.reset();
+    const { newAvatar } = this.state;
+    if (window.confirm("Are you sure you want to change your profile picture?")) {
+      e.preventDefault();
+      this.props.firebase.updateProfile({ photoURL: newAvatar });
+      this.updateChatKitAccount();
+    }
   };
 
   handleUsername = e => {
-    e.preventDefault();
-    this.props.firebase.updateProfile({ displayName: this.state.username });
-    e.target.reset();
+    const { newUsername } = this.state;
+    if (window.confirm("Are you sure you want to change your username?")) {
+      e.preventDefault();
+      this.props.firebase.updateProfile({ displayName: newUsername });
+      this.updateChatKitAccount();
+    }
   };
 
-  handleDeleteAccount = e => {
-    console.log(this.props.firebase);
-    // Need to be able to delete account from auth & database
-    // this.props.firebase.delete() does not work alongside re-auth-ing user
-    console.log("End of function.");
+  updateChatKitAccount = async () => {
+    const { newUsername, newAvatar } = this.state;
+    const { uid } = this.props;
+    const { displayName, photoURL } = this.props.profile;
+    const chatkitResponse = await fetch(
+      "https://us-central1-aztec-game-laboratory.cloudfunctions.net/updateChatkitAccount",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        mode: "cors",
+        body: JSON.stringify({
+          id: uid,
+          name: newUsername ? newUsername : displayName,
+          avatar_url: newAvatar ? newAvatar : photoURL
+        })
+      }
+    );
+    const content = await chatkitResponse.json();
+    console.log("From firebase:", content);
   };
 
   handleChange = e => {
@@ -39,7 +61,7 @@ class UserSettings extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-
+    const { displayName, email, exp, photoURL, role } = this.props.profile;
     return (
       <div>
         {isLoggedIn ? (
@@ -48,27 +70,26 @@ class UserSettings extends Component {
             <h1>PROFILE</h1>
 
             {/* CURRENT AVATAR */}
-            <img src={this.props.profile.photoURL} alt="" height="300" width="300" />
+            <img src={photoURL} alt="" height="300" width="300" />
 
             {/* CURRENT SETTINGS PROTOTYPING */}
             <p>
-              Name: {this.props.profile.displayName}
+              Name: {displayName}
               <br />
-              Email: {this.props.profile.email}
+              Email: {email}
               <br />
-              EXP: {this.props.profile.exp}
+              EXP: {exp}
               <br />
-              PhotoURL: {this.props.profile.photoURL}
+              PhotoURL: {photoURL}
               <br />
-              Role: {this.props.profile.role}
+              Role: {role}
               <br />
             </p>
 
             {/* AVATAR */}
             <h2>Change avatar (URL)</h2>
             <form onSubmit={this.handleAvatar}>
-              <input type="text" id="avatar" onChange={this.handleChange} />
-              {/* <img src={this.state.avatar} alt="" /> */}
+              <input type="text" id="newAvatar" onChange={this.handleChange} />
               <button>Change picture</button>
             </form>
 
@@ -77,25 +98,15 @@ class UserSettings extends Component {
 
             {/* CHANGE USERNAME */}
             <h2>Change username</h2>
-            <form
-              onSubmit={e => {
-                if (window.confirm("Are you sure?")) this.handleUsername(e);
-              }}
-            >
-              <input type="text" id="username" onChange={this.handleChange} />
-              <button>Change username</button>
+            <form onSubmit={this.handleUsername}>
+              <input
+                type="text"
+                id="newUsername"
+                onChange={this.handleChange}
+                value={this.state.newUsername}
+              />
+              <button type="submit">Change username</button>
             </form>
-
-            {/* DELETE ACCOUNT */}
-            {/* <h2>Delete account</h2>
-            <p>Once you delete your account, there is no going back. Please be certain. </p>
-            <button
-              onClick={e => {
-                if (window.confirm("Are you sure?")) this.handleDeleteAccount(e);
-              }}
-            >
-              Delete your account
-            </button> */}
           </div>
         ) : null}
       </div>
@@ -106,6 +117,7 @@ class UserSettings extends Component {
 const mapStateToProps = state => {
   return {
     isLoggedIn: isLoggedIn(state),
+    uid: getUserUID(state),
     profile: state.firebase.profile
   };
 };

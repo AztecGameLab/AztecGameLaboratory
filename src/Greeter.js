@@ -6,7 +6,6 @@ import { firestoreConnect } from "react-redux-firebase";
 
 class Greeter extends Component {
   render() {
-    console.log(this.props);
     return <Greeting profile={this.props.profile} />;
   }
 }
