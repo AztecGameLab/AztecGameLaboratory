@@ -20,13 +20,10 @@ class JoinWindow extends Component {
   }
 
   resetRooms = () => {
-    var newRooms = this.props.joinableRooms;
+    const { joinableRooms } = this.props;
     this.setState({
-      rooms: newRooms
-    }).then(() => {
-      this.setState({
-        filteredRooms: newRooms
-      });
+      rooms: joinableRooms,
+      filteredRooms: joinableRooms
     });
   };
 

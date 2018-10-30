@@ -6,21 +6,20 @@ import JoinWindow from "./JoinWindow";
 
 class CreateJoinModal extends Component {
   state = {
-    creating: false,
-    joining: false
+    creating: false
   };
 
   handleCreateClick = () => {
-    this.setState({ creating: true, joining: false });
+    this.setState({ creating: true });
   };
 
   handleJoinClick = () => {
-    this.setState({ creating: false, joining: true });
+    this.setState({ creating: false });
   };
 
   render() {
-    const { isCJModalOpen, hideCJModal, joinRoom } = this.props;
-    const { creating, joining } = this.state;
+    const { isCJModalOpen, hideCJModal, joinRoom, currentUser } = this.props;
+    const { creating } = this.state;
 
     // Use classnames library to parse CSS classes
     let showHideClassName = cx(styles.modal, {
@@ -34,18 +33,20 @@ class CreateJoinModal extends Component {
           <button onClick={hideCJModal}>Close</button>
           <button onClick={this.handleCreateClick}>Create</button>
           <button onClick={this.handleJoinClick}>Join</button>
-          <ToggleModal creating={creating} joining={joining} joinRoom={joinRoom} />
+          {creating ? (
+            <CreateWindow
+              creating={creating}
+              joinRoom={joinRoom}
+              currentUser={currentUser}
+              hideCJModal={hideCJModal}
+            />
+          ) : (
+            <JoinWindow creating={creating} joinRoom={joinRoom} />
+          )}
         </section>
       </div>
     );
   }
-}
-
-function ToggleModal(props) {
-  const { creating, joining, joinRoom } = props;
-  if (creating) return <CreateWindow />;
-  if (joining) return <JoinWindow joinRoom={joinRoom} />;
-  return <p>Click an option!</p>;
 }
 
 export default CreateJoinModal;

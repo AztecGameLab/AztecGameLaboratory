@@ -96,11 +96,12 @@ class ChatContainer extends Component {
     // console.log("USERS: ", currentUser ? currentUser.users : "none lol");
     return (
       <div>
-        <Title />
+        <h2>Chat:</h2>
         <CreateJoinModal
           isCJModalOpen={isCJModalOpen}
           hideCJModal={this.hideCJModal}
           joinRoom={this.joinRoom}
+          currentUser={currentUser}
         />
         <button onClick={this.showCJModal}>Create or Join</button>
         <RoomList rooms={currentUser.rooms} joinRoom={this.joinRoom} />
@@ -109,10 +110,6 @@ class ChatContainer extends Component {
       </div>
     );
   }
-}
-
-function Title() {
-  return <h2>Chat:</h2>;
 }
 
 const mapStateToProps = state => {
