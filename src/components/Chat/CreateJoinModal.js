@@ -6,7 +6,7 @@ import JoinWindow from "./JoinWindow";
 
 class CreateJoinModal extends Component {
   state = {
-    creating: false
+    creating: true
   };
 
   handleCreateClick = () => {
@@ -41,7 +41,12 @@ class CreateJoinModal extends Component {
               hideCJModal={hideCJModal}
             />
           ) : (
-            <JoinWindow creating={creating} joinRoom={joinRoom} />
+            <JoinWindow
+              creating={creating}
+              joinRoom={joinRoom}
+              currentUser={currentUser}
+              hideCJModal={hideCJModal}
+            />
           )}
         </section>
       </div>

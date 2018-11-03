@@ -31,6 +31,7 @@ class ChatContainer extends Component {
     // Chatkit connect to server
     chatManager.connect().then(currentUser => {
       this.setState({ currentUser });
+      this.refreshJoinableRooms();
       return this.joinRoom(this.state.roomId);
     });
   }
