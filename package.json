@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@pusher/chatkit": "^0.7.17",
+    "classnames": "^2.2.6",
     "firebase": "^5.4.2",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
@@ -14,6 +15,7 @@
     "react-scripts": "2.0.3",
     "redux": "^4.0.0",
     "redux-firestore": "^0.5.8",
+    "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1"
   },
   "scripts": {

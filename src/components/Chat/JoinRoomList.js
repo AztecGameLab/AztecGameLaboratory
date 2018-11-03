@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 
-class RoomList extends Component {
+class JoinRoomList extends Component {
   renderRooms = rooms => {
     return rooms.map(room => {
       const { name, id } = room;
-      const { joinRoom } = this.props;
       return (
         <div key={id}>
-          <button onClick={() => joinRoom(id)}>{name}</button>
+          <input name={name} id={id} type="checkbox" onChange={this.handleChange} />
+          <label htmlFor={name}> {name} </label>
         </div>
       );
     });
+  };
+
+  handleChange = event => {
+    this.props.addToSelected(event.target.id);
   };
 
   render() {
@@ -27,4 +31,4 @@ class RoomList extends Component {
   }
 }
 
-export default RoomList;
+export default JoinRoomList;

@@ -15,6 +15,7 @@ class Header extends Component {
         <Link to={"/art"}>Art</Link>
         <Link to={"/music"}>Music</Link>
         {isLoggedIn ? <Link to={"/settings"}>Settings</Link> : null}
+        {isLoggedIn ? <Link to={"/createpost"}>CREATE POST</Link> : null}
         <button onClick={() => this.props.firebase.logout()}>Sign Out</button>
       </header>
     );
