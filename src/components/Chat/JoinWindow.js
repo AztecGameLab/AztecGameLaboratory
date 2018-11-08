@@ -1,6 +1,4 @@
 // Join room content container for modal
-// TODO: Joining does not clear checkboxes and toggle
-// checkboxes not functioning properly
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -20,6 +18,7 @@ class JoinWindow extends Component {
     });
   }
 
+  // Clears search parameters and updates newest joinable rooms
   resetRooms = () => {
     const { joinableRooms } = this.props;
     this.setState({
@@ -38,9 +37,10 @@ class JoinWindow extends Component {
     this.setState({ filteredRooms });
   };
 
+  // Adds and removes rooms to be joined
   addToSelected = id => {
     var selectedRooms = [...this.state.selectedRooms];
-    var tmp = selectedRooms.indexOf(id);
+    var tmp = this.getIndex(selectedRooms, parseInt(id));
     console.log(tmp);
     if (tmp === -1) {
       selectedRooms.push(parseInt(id));
@@ -51,9 +51,27 @@ class JoinWindow extends Component {
     }
   };
 
+  // helper for searching element in array
+  getIndex = (arr, val) => {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] === val) {
+        return i;
+      }
+    }
+    return -1; //to handle the case where the value doesn't exist
+  };
+
+  // Handles clicking join after all desired rooms to be joined have been selected
   handleJoin = () => {
-    const { currentUser, hideCJModal, joinRoom } = this.props;
+    const {
+      currentUser,
+      hideCJModal,
+      joinRoom,
+      refreshJoinableRooms,
+      handleCreateClick
+    } = this.props;
     var selectedRooms = [...this.state.selectedRooms];
+    // Sets newly displayed room as latest room checked by user
     var roomToJoin = -1;
     for (let i = 0; i < selectedRooms.length; i++) {
       if (i === selectedRooms.length - 1) roomToJoin = selectedRooms[i];
@@ -61,8 +79,12 @@ class JoinWindow extends Component {
         console.log(`Joined room with ID: ${room.id}`);
       });
     }
+    // subscribes to latest room clicked, refreshes joinable rooms,
+    // resets search parameters in component, resets modal back to creating and hides it
     joinRoom(roomToJoin);
+    refreshJoinableRooms();
     this.resetRooms();
+    handleCreateClick();
     hideCJModal();
   };
 

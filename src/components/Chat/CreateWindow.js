@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-//TODO: Allow user to initialize room with users 
+//TODO: Allow user to initialize room with users
 class CreateWindow extends Component {
   state = {
     roomName: "",

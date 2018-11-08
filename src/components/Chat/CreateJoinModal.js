@@ -18,7 +18,7 @@ class CreateJoinModal extends Component {
   };
 
   render() {
-    const { isCJModalOpen, hideCJModal, joinRoom, currentUser } = this.props;
+    const { isCJModalOpen, hideCJModal, joinRoom, currentUser, refreshJoinableRooms } = this.props;
     const { creating } = this.state;
 
     // Use classnames library to parse CSS classes
@@ -46,6 +46,8 @@ class CreateJoinModal extends Component {
               joinRoom={joinRoom}
               currentUser={currentUser}
               hideCJModal={hideCJModal}
+              refreshJoinableRooms={refreshJoinableRooms}
+              handleCreateClick={this.handleCreateClick}
             />
           )}
         </section>

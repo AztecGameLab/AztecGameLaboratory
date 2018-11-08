@@ -103,6 +103,7 @@ class ChatContainer extends Component {
           hideCJModal={this.hideCJModal}
           joinRoom={this.joinRoom}
           currentUser={currentUser}
+          refreshJoinableRooms={this.refreshJoinableRooms}
         />
         <button onClick={this.showCJModal}>Create or Join</button>
         <RoomList rooms={currentUser.rooms} joinRoom={this.joinRoom} />
