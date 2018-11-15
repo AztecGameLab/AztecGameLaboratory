@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 
 import { isLoggedIn } from "../redux/selectors";
 import { createArtPost } from "../redux/actions/createArtPostActions";
+
 class CreatePost extends Component {
+  // Forms to fill to be passed on to
   state = {
     title: "",
     description: "",
@@ -17,6 +19,7 @@ class CreatePost extends Component {
   };
 
   handleChange = e => {
+    // Checks user input by each character
     this.setState({
       [e.target.id]: e.target.value
     });
@@ -25,37 +28,24 @@ class CreatePost extends Component {
   handleSubmit = e => {
     e.preventDefault();
     console.log(this.state);
-    // Returns to the home page after creating a project
+    // TO DO:
     // Check which state is active then post correctly
     // this.props.createArtPost(this.state);
+    // Returns to the home page after creating a project
     this.props.history.push("/");
   };
 
   handleArtForm() {
-    this.setState({
-      artForm: true,
-      gameForm: false,
-      musicForm: false
-    });
-    console.log(this.form);
+    console.log(this.state);
+    console.log("Art");
   }
 
   handleGameForm() {
-    this.setState({
-      artForm: false,
-      gameForm: true,
-      musicForm: false
-    });
-    console.log(this.form);
+    console.log("Game");
   }
 
   handleMusicForm() {
-    this.setState({
-      artForm: false,
-      gameForm: false,
-      musicForm: true
-    });
-    console.log(this.form);
+    console.log("Music");
   }
 
   render() {
