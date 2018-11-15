@@ -4,6 +4,7 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import Thumbnail from "../../sharedComponents/Thumbnail";
 import Avatar from "../../sharedComponents/Avatar";
+import "../../MainPanel.css";
 
 class ArtGrid extends Component {
   renderArtwork = art => {
@@ -24,7 +25,7 @@ class ArtGrid extends Component {
 
   render() {
     const { art } = this.props;
-    return <div>{art ? this.renderArtwork(art) : "loading..."}</div>;
+    return <div className="main-panel">{art ? this.renderArtwork(art) : "loading..."}</div>;
   }
 }
 

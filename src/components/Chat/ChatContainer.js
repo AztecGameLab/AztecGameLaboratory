@@ -8,6 +8,7 @@ import MessageList from "./MessageList";
 import SendMessageForm from "./SendMessageForm";
 import RoomList from "./RoomList";
 import CreateJoinModal from "./CreateJoinModal";
+import "./chat.module.css";
 
 class ChatContainer extends Component {
   state = {
@@ -96,19 +97,22 @@ class ChatContainer extends Component {
     const { currentUser, messages, isCJModalOpen } = this.state;
     // console.log("USERS: ", currentUser ? currentUser.users : "none lol");
     return (
-      <div>
-        <h2>Chat:</h2>
-        <CreateJoinModal
-          isCJModalOpen={isCJModalOpen}
-          hideCJModal={this.hideCJModal}
-          joinRoom={this.joinRoom}
-          currentUser={currentUser}
-          refreshJoinableRooms={this.refreshJoinableRooms}
-        />
-        <button onClick={this.showCJModal}>Create or Join</button>
-        <RoomList rooms={currentUser.rooms} joinRoom={this.joinRoom} />
-        <MessageList messages={messages} />
-        <SendMessageForm sendMessage={this.sendMessage} />
+      <div className="chat-container">
+        <div>
+          <CreateJoinModal
+            isCJModalOpen={isCJModalOpen}
+            hideCJModal={this.hideCJModal}
+            joinRoom={this.joinRoom}
+            currentUser={currentUser}
+            refreshJoinableRooms={this.refreshJoinableRooms}
+          />
+          <button onClick={this.showCJModal}>Create or Join</button>
+          <RoomList rooms={currentUser.rooms} joinRoom={this.joinRoom} />
+        </div>
+        <div>
+          <MessageList messages={messages} />
+          <SendMessageForm sendMessage={this.sendMessage} />
+        </div>
       </div>
     );
   }

@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import firebase from "../../firebaseConfig";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import ChatContainer from "../Chat/ChatContainer";
-
 import { isLoggedIn } from "../../redux/selectors";
+import "./Sidebar.css";
 
 // Configure FirebaseUI
 let uiConfig = {
@@ -21,7 +21,7 @@ class Sidebar extends Component {
   render() {
     const { isLoggedIn } = this.props;
     return (
-      <div>
+      <div className="sidebar">
         {isLoggedIn ? (
           <ChatContainer />
         ) : (

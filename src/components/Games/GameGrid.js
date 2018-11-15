@@ -4,6 +4,7 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import Thumbnail from "../../sharedComponents/Thumbnail";
 import Avatar from "../../sharedComponents/Avatar";
+import "../../MainPanel.css";
 
 class GameGrid extends Component {
   renderGames = games => {
@@ -24,7 +25,7 @@ class GameGrid extends Component {
 
   render() {
     const { games } = this.props;
-    return <div>{games ? this.renderGames(games) : "hi"}</div>;
+    return <div className="main-panel">{games ? this.renderGames(games) : "hi"}</div>;
   }
 }
 

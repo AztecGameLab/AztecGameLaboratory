@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withFirebase } from "react-redux-firebase";
 import { isLoggedIn, getUserUID } from "../redux/selectors";
+import "../MainPanel.css";
 
 class UserSettings extends Component {
   // These states keep the user input and translate it into Firebase
@@ -63,7 +64,7 @@ class UserSettings extends Component {
     const { isLoggedIn } = this.props;
     const { displayName, email, exp, photoURL, role } = this.props.profile;
     return (
-      <div>
+      <div className="main-panel">
         {isLoggedIn ? (
           <div>
             {/* PROFILE SETTINGS */}

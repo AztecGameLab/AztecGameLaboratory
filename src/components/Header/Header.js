@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { withFirebase } from "react-redux-firebase";
 import { connect } from "react-redux";
 import { isLoggedIn } from "../../redux/selectors";
+import "./Header.css";
 
 class Header extends Component {
   render() {
     const { isLoggedIn } = this.props;
     return (
       <header>
-        <h1>Welcome to Aztec Game Lab</h1>
+        <h2>Welcome to Aztec Game Lab</h2>
         <Link to={"/"}>Home</Link>
         <Link to={"/games"}>Games</Link>
         <Link to={"/art"}>Art</Link>
