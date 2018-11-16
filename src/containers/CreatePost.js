@@ -6,16 +6,12 @@ import { createArtPost } from "../redux/actions/createArtPostActions";
 
 class CreatePost extends Component {
   // Forms to fill to be passed on to
+  // need to update actions to obtain the correct data
   state = {
+    view: "game",
     title: "",
     description: "",
     url: ""
-  };
-
-  form = {
-    artForm: false,
-    gameForm: true,
-    musicForm: false
   };
 
   handleChange = e => {
@@ -35,18 +31,28 @@ class CreatePost extends Component {
     this.props.history.push("/");
   };
 
-  handleArtForm() {
-    console.log(this.state);
+  // what we can do here is reference the id instead of 3 different functions
+
+  handleArtForm = e => {
+    this.setState({
+      view: "art"
+    });
     console.log("Art");
-  }
+  };
 
-  handleGameForm() {
+  handleGameForm = e => {
+    this.setState({
+      view: "game"
+    });
     console.log("Game");
-  }
+  };
 
-  handleMusicForm() {
+  handleMusicForm = e => {
+    this.setState({
+      view: "music"
+    });
     console.log("Music");
-  }
+  };
 
   render() {
     const { isLoggedIn } = this.props;
@@ -68,7 +74,7 @@ class CreatePost extends Component {
             </div>
 
             <form onSubmit={this.handleSubmit}>
-              {this.form.artForm ? (
+              {this.state.view === "art" ? (
                 <div>
                   <h1>CREATE ART</h1>
                   <h2>TITLE</h2>
@@ -82,7 +88,7 @@ class CreatePost extends Component {
                   </div>
                 </div>
               ) : null}
-              {this.form.gameForm ? (
+              {this.state.view === "game" ? (
                 <div>
                   <h1>CREATE GAME</h1>
                   <h2>TITLE</h2>
@@ -96,7 +102,7 @@ class CreatePost extends Component {
                   </div>
                 </div>
               ) : null}
-              {this.form.musicForm ? (
+              {this.state.view === "music" ? (
                 <div>
                   <h1>CREATE MUSIC</h1>
                   <h2>TITLE</h2>
