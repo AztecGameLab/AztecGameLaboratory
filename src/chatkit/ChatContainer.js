@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { getUserUID } from "../../redux/selectors";
-import { sendJoinableRooms } from "../../redux/actions";
+import { getUserUID } from "../redux/auth/authSelectors";
+import { sendJoinableRooms } from "../redux/chatkit/chatkitActions";
 import { ChatManager, TokenProvider } from "@pusher/chatkit";
 import MessageList from "./MessageList";
 import SendMessageForm from "./SendMessageForm";

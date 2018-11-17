@@ -5,7 +5,10 @@
   "dependencies": {
     "@pusher/chatkit": "^0.7.17",
     "classnames": "^2.2.6",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
     "firebase": "^5.4.2",
+    "node-sass": "^4.10.0",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
     "react-firebaseui": "^3.0.7",

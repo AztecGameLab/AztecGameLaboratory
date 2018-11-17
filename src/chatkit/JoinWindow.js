@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getJoinableRooms } from "../../redux/selectors";
+import { getJoinableRooms } from "../redux/chatkit/chatkitSelectors";
 import JoinRoomList from "./JoinRoomList";
 
 class JoinWindow extends Component {

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
-import Thumbnail from "../../sharedComponents/Thumbnail";
-import Avatar from "../../sharedComponents/Avatar";
+import Thumbnail from "../common/Thumbnail";
+import Avatar from "../common/Avatar";
 
 class ArtGrid extends Component {
   renderArtwork = art => {

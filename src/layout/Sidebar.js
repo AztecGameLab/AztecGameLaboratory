@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import firebase from "../../firebaseConfig";
+import firebase from "../firebaseConfig";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import ChatContainer from "../Chat/ChatContainer";
+import ChatContainer from "../chatkit/ChatContainer";
 
-import { isLoggedIn } from "../../redux/selectors";
+import { isLoggedIn } from "../redux/auth/authSelectors";
 
 // Configure FirebaseUI
 let uiConfig = {
