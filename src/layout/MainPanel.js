@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import GameGrid from "../Games/GameGrid";
-import ArtGrid from "../Art/ArtGrid";
-import HomePage from "../Home/Home";
-import UserSettings from "../../containers/UserSettings";
+import GameGrid from "../games/GameGrid";
+import ArtGrid from "../art/ArtGrid";
+import HomePage from "../home/Home";
+import UserSettings from "../user/UserSettings";
 
 class MainPanel extends Component {
   render() {

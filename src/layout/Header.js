@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withFirebase } from "react-redux-firebase";
 import { connect } from "react-redux";
-import { isLoggedIn } from "../../redux/selectors";
+import { isLoggedIn } from "../redux/auth/authSelectors";
 
 class Header extends Component {
   render() {

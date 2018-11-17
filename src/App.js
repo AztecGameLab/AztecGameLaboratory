@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Header from "./components/Header/Header";
-import Sidebar from "./components/Sidebar/Sidebar";
-import MainPanel from "./components/MainPanel/MainPanel";
+import Header from "./layout/Header";
+import Sidebar from "./layout/Sidebar";
+import MainPanel from "./layout/MainPanel";
 
 class App extends Component {
   render() {

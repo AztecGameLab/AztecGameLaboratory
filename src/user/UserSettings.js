@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withFirebase } from "react-redux-firebase";
-import { isLoggedIn, getUserUID } from "../redux/selectors";
+import { isLoggedIn, getUserUID } from "../redux/auth/authSelectors";
 
 class UserSettings extends Component {
   // These states keep the user input and translate it into Firebase
