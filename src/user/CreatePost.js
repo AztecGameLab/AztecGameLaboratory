@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { isLoggedIn } from "../redux/selectors";
-import { createArtPost } from "../redux/actions/createArtPostActions";
+import { isLoggedIn } from "../redux/auth/authSelectors";
+import { createArtPost } from "../redux/submission/submissionActions";
 
 class CreatePost extends Component {
   // Forms to fill to be passed on to
