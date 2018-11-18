@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { isLoggedIn } from "../redux/auth/authSelectors";
-import { createArtPost } from "../redux/submission/submissionActions";
+import { createPost } from "../redux/submission/submissionActions";
 
 class CreatePost extends Component {
-  // Forms to fill to be passed on to
-  // need to update actions to obtain the correct data
   state = {
-    view: "game",
+    // Default is "games"
+    payload: "games",
     title: "",
     description: "",
     url: ""
@@ -24,34 +23,16 @@ class CreatePost extends Component {
   handleSubmit = e => {
     e.preventDefault();
     console.log(this.state);
-    // TO DO:
-    // Check which state is active then post correctly
-    // this.props.createArtPost(this.state);
-    // Returns to the home page after creating a project
+    this.props.createPost(this.state);
+    // Returns to the home page after creating a post
     this.props.history.push("/");
   };
 
-  // what we can do here is reference the id instead of 3 different functions
-
-  handleArtForm = e => {
+  // Is it an art post, game post, or music post?
+  handlePayloadChange = e => {
     this.setState({
-      view: "art"
+      payload: e.target.id
     });
-    console.log("Art");
-  };
-
-  handleGameForm = e => {
-    this.setState({
-      view: "game"
-    });
-    console.log("Game");
-  };
-
-  handleMusicForm = e => {
-    this.setState({
-      view: "music"
-    });
-    console.log("Music");
   };
 
   render() {
@@ -61,20 +42,22 @@ class CreatePost extends Component {
       <div>
         {isLoggedIn ? (
           <div>
+            {/* Header for the buttons */}
             <div>
-              <button id="artForm" onClick={this.handleArtForm}>
+              <button id="art" onClick={this.handlePayloadChange}>
                 ART
               </button>
-              <button id="gameForm" onClick={this.handleGameForm}>
+              <button id="games" onClick={this.handlePayloadChange}>
                 GAME
               </button>
-              <button id="musicForm" onClick={this.handleMusicForm}>
+              <button id="music" onClick={this.handlePayloadChange}>
                 MUSIC
               </button>
             </div>
 
-            <form onSubmit={this.handleSubmit}>
-              {this.state.view === "art" ? (
+            {/* Kept the separate forms just incase different values are needed */}
+            {this.state.payload === "art" ? (
+              <form onSubmit={this.handleSubmit}>
                 <div>
                   <h1>CREATE ART</h1>
                   <h2>TITLE</h2>
@@ -87,8 +70,11 @@ class CreatePost extends Component {
                     <button>Share your creation!</button>
                   </div>
                 </div>
-              ) : null}
-              {this.state.view === "game" ? (
+              </form>
+            ) : null}
+
+            {this.state.payload === "games" ? (
+              <form onSubmit={this.handleSubmit}>
                 <div>
                   <h1>CREATE GAME</h1>
                   <h2>TITLE</h2>
@@ -101,8 +87,10 @@ class CreatePost extends Component {
                     <button>Share your creation!</button>
                   </div>
                 </div>
-              ) : null}
-              {this.state.view === "music" ? (
+              </form>
+            ) : null}
+            {this.state.payload === "music" ? (
+              <form onSubmit={this.handleSubmit}>
                 <div>
                   <h1>CREATE MUSIC</h1>
                   <h2>TITLE</h2>
@@ -115,8 +103,8 @@ class CreatePost extends Component {
                     <button>Share your creation!</button>
                   </div>
                 </div>
-              ) : null}
-            </form>
+              </form>
+            ) : null}
           </div>
         ) : null}
       </div>
@@ -124,18 +112,21 @@ class CreatePost extends Component {
   }
 }
 
+// Used to check if the user is logged in
 const mapStateToProps = state => {
   return {
     isLoggedIn: isLoggedIn(state)
   };
 };
 
+// Used to speak with the backend
 const mapDispatchToProps = dispatch => {
   return {
-    createArtPost: art => dispatch(createArtPost(art))
+    createPost: post => dispatch(createPost(post))
   };
 };
 
+// Connects the functions
 export default connect(
   mapStateToProps,
   mapDispatchToProps

@@ -15,7 +15,7 @@ class GameGrid extends Component {
           <h3>from {displayName}</h3>
           <Avatar url={photoURL} />
           <p>{games[gameID].description}</p>
-          <Thumbnail url={games[gameID].thumbnail} />
+          <Thumbnail url={games[gameID].url} />
           <br />
         </div>
       );
