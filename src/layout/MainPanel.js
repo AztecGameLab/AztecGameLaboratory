@@ -4,6 +4,7 @@ import GameGrid from "../games/GameGrid";
 import ArtGrid from "../art/ArtGrid";
 import HomePage from "../home/Home";
 import UserSettings from "../user/UserSettings";
+import CreatePost from "../user/CreatePost";
 
 class MainPanel extends Component {
   render() {
@@ -13,6 +14,7 @@ class MainPanel extends Component {
         <Route path="/games" component={GameGrid} />
         <Route path="/art" component={ArtGrid} />
         <Route path="/settings" component={UserSettings} />
+        <Route path="/createpost" component={CreatePost} />
       </Switch>
     );
   }

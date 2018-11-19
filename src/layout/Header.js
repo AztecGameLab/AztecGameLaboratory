@@ -4,6 +4,8 @@ import { withFirebase } from "react-redux-firebase";
 import { connect } from "react-redux";
 import { isLoggedIn } from "../redux/auth/authSelectors";
 
+// Be sure to edit MainPanel.js as well to proper route
+
 class Header extends Component {
   render() {
     const { isLoggedIn } = this.props;
