@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import styles from "./chat.module.css";
-import cx from "classnames";
+import "./Chatkit.css";
 import CreateWindow from "./CreateWindow";
 import JoinWindow from "./JoinWindow";
 
@@ -18,18 +17,12 @@ class CreateJoinModal extends Component {
   };
 
   render() {
-    const { isCJModalOpen, hideCJModal, joinRoom, currentUser, refreshJoinableRooms } = this.props;
+    const { hideCJModal, joinRoom, currentUser, refreshJoinableRooms } = this.props;
     const { creating } = this.state;
 
-    // Use classnames library to parse CSS classes
-    let showHideClassName = cx(styles.modal, {
-      [styles["display-block"]]: isCJModalOpen,
-      [styles["display-none"]]: !isCJModalOpen
-    });
-
     return (
-      <div ref={this.setWrapperRef} className={showHideClassName}>
-        <section className={styles["modal-main"]}>
+      <React.Fragment>
+        <section>
           <button onClick={hideCJModal}>Close</button>
           <button onClick={this.handleCreateClick}>Create</button>
           <button onClick={this.handleJoinClick}>Join</button>
@@ -51,7 +44,7 @@ class CreateJoinModal extends Component {
             />
           )}
         </section>
-      </div>
+      </React.Fragment>
     );
   }
 }

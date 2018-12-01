@@ -8,13 +8,15 @@ import MessageList from "./MessageList";
 import SendMessageForm from "./SendMessageForm";
 import RoomList from "./RoomList";
 import CreateJoinModal from "./CreateJoinModal";
+import Modal from "react-modal";
+Modal.setAppElement("body");
 
 class ChatContainer extends Component {
   state = {
     currentUser: {},
     messages: [],
     roomId: 19017534,
-    isCJModalOpen: false
+    isModalOpen: false
   };
 
   componentDidMount() {
@@ -73,7 +75,7 @@ class ChatContainer extends Component {
     });
   };
 
-  // Refreshes list of joinable rooms of user
+  // Refreshes list of joinable rooms for user
   refreshJoinableRooms = () => {
     const { currentUser } = this.state;
     const { sendJoinableRooms } = this.props;
@@ -82,29 +84,29 @@ class ChatContainer extends Component {
     });
   };
 
-  // Toggle functions for opening create/join room modal
   showCJModal = () => {
-    this.setState({ isCJModalOpen: true });
+    this.setState({ isModalOpen: true });
     this.refreshJoinableRooms();
   };
 
   hideCJModal = () => {
-    this.setState({ isCJModalOpen: false });
+    this.setState({ isModalOpen: false });
   };
 
   render() {
-    const { currentUser, messages, isCJModalOpen } = this.state;
+    const { currentUser, messages, isModalOpen } = this.state;
     // console.log("USERS: ", currentUser ? currentUser.users : "none lol");
     return (
       <div>
         <h2>Chat:</h2>
-        <CreateJoinModal
-          isCJModalOpen={isCJModalOpen}
-          hideCJModal={this.hideCJModal}
-          joinRoom={this.joinRoom}
-          currentUser={currentUser}
-          refreshJoinableRooms={this.refreshJoinableRooms}
-        />
+        <Modal isOpen={isModalOpen} onRequestClose={this.hideCJModal}>
+          <CreateJoinModal
+            hideCJModal={this.hideCJModal}
+            joinRoom={this.joinRoom}
+            currentUser={currentUser}
+            refreshJoinableRooms={this.refreshJoinableRooms}
+          />
+        </Modal>
         <button onClick={this.showCJModal}>Create or Join</button>
         <RoomList rooms={currentUser.rooms} joinRoom={this.joinRoom} />
         <MessageList messages={messages} />
